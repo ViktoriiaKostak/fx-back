@@ -6,6 +6,11 @@ COPY package*.json ./
 
 RUN npm install
 
+RUN npm uninstall nodemailer
+
+RUN npm install nodemailer
+
+
 COPY . .
 
 RUN npx prisma generate

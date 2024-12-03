@@ -17,7 +17,7 @@ export class RulesService {
     const { email, baseCurrency, targetCurrency, type, percentage } = createRuleDto;
 
     console.log('createRuleDto:', createRuleDto);
-    const user = await this.userService.findUserByEmailOrCreate(email);
+    const user = await this.userService.findUserByEmail(email);
 
     const activeRulesCount = await this.prisma.rule.count({
       where: { userId: user.id, isActive: true },
@@ -42,7 +42,7 @@ export class RulesService {
   }
 
   async getRulesByUser(email: string) {
-    const user = await this.userService.findUserByEmailOrCreate(email);
+    const user = await this.userService.findUserByEmail(email);
     return this.prisma.rule.findMany({
       where: { userId: user.id },
       include: { baseCurrency: true, targetCurrency: true },
@@ -55,7 +55,7 @@ export class RulesService {
 
     const { email, baseCurrencyId, targetCurrencyId, type, percentage, isActive } = updateRuleDto;
 
-    const user = await this.userService.findUserByEmailOrCreate(email);
+    const user = await this.userService.findUserByEmail(email);
 
     return this.prisma.rule.update({
       where: { id },

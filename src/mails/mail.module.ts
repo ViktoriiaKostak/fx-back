@@ -21,7 +21,7 @@ import { EmailService } from './mail.service';
           from: `${configService.get<string>('EMAIL_FROM')} <${configService.get<string>('EMAIL_USER')}>`,
         },
         template: {
-          adapter: new HandlebarsAdapter(),
+          // adapter: new HandlebarsAdapter(),
           options: {
             strict: true,
           },
